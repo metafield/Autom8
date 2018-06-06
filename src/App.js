@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Device from "./Components/Device";
+import { Switch } from 'antd';
+
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 class App extends Component {
+  onChange(checked) {
+    console.log(`switch to ${checked}`);
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Device />
       </div>
     );
   }
