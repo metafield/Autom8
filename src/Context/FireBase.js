@@ -1,6 +1,18 @@
-import React from "react";
+import React from 'react';
+import firebase from 'firebase';
 
 const { Provider, Consumer } = React.createContext({});
+
+var config = {
+  apiKey: "AIzaSyCK0wlYbBdeYHUih6NbPv67Yh7owgxrMGQ",
+  authDomain: "autom8-8.firebaseapp.com",
+  databaseURL: "https://autom8-8.firebaseio.com",
+  projectId: "autom8-8",
+  storageBucket: "autom8-8.appspot.com",
+  messagingSenderId: "387177266439"
+};
+firebase.initializeApp(config);
+
 
 export class FireBaseProvider extends React.Component {
   state = {
@@ -10,6 +22,14 @@ export class FireBaseProvider extends React.Component {
   dispatch = vals => {
     this.setState(vals);
   };
+
+  componentDidMount() {
+    const starCountRef = firebase.database().ref('switch/');
+    starCountRef.on('value', (snapshot) => {
+      this.setState({devices: {...snapshot.val()}});
+      console.log('mounted and state is: ', this.state);
+    });
+  }
 
   render() {
     return (
@@ -26,9 +46,6 @@ export const fireBaseConnect = Component =>
       return (
         <Consumer>
           {context => {
-            console.log(this.props);
-            
-            debugger
             const newProps = Object.assign({}, context, this.props);
             return <Component {...newProps} />;
           }}
