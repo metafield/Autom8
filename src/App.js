@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FireBaseProvider } from './Context/FireBase'
 import logo from './logo.svg';
 import './App.css';
 import Device from "./Components/Device";
@@ -14,7 +15,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Device />
+        <p> -{this.count}- </p>
+        <FireBaseProvider>
+          <Device hey="lo" />
+        </FireBaseProvider>
       </div>
     );
   }
