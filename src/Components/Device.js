@@ -7,7 +7,7 @@ class Device extends React.Component {
     return (
       <div className="Device">
         <h1> A Device </h1>
-    <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
+          <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="cross" />} />
         <hr/>
       </div>
     );

@@ -19,6 +19,19 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCK0wlYbBdeYHUih6NbPv67Yh7owgxrMGQ",
+        authDomain: "autom8-8.firebaseapp.com",
+        databaseURL: "https://autom8-8.firebaseio.com",
+        projectId: "autom8-8",
+        storageBucket: "autom8-8.appspot.com",
+        messagingSenderId: "387177266439"
+      };
+      firebase.initializeApp(config);
+    </script>
     <title>React App</title>
   </head>
   <body>
