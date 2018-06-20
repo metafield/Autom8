@@ -24,7 +24,8 @@ export class FireBaseProvider extends React.Component {
   };
 
   componentDidMount() {
-    const starCountRef = firebase.database().ref('switch/');
+    // TODO Handle users here. Admin for now.
+    const starCountRef = firebase.database().ref('users/admin/switches/');
     starCountRef.on('value', (snapshot) => {
       this.setState({devices: {...snapshot.val()}});
       console.log('mounted and state is: ', this.state);
