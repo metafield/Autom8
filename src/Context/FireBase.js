@@ -19,8 +19,27 @@ export class FireBaseProvider extends React.Component {
     count: 42
   };
 
-  dispatch = vals => {
-    this.setState(vals);
+  dispatch = (switchId, switchPosition) => {
+    // this.setState(vals);
+    console.log(`dispatch called!`);
+    console.log(switchId, ': ', switchPosition);
+
+    const updates = {
+      switchId
+    }
+    
+    // TODO: ref should be a constant that reflects what user is signed in
+    firebase.database().ref(`/users/admin/switches/${switchId}`).update({'state': switchPosition}, function (error) {
+      if (error) {
+        // The write failed...
+        console.log('oh no');
+
+      } else {
+        // Data saved successfully!
+        console.log('oh ye');
+
+      }
+    });
   };
 
   componentDidMount() {
