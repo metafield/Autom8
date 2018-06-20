@@ -10,22 +10,12 @@ class Device extends Component {
     super(props)
     this.dispatch = props.dispatch;
     this.switchId = props.switchId;
-    // TODO: this is a hack to prevent a state change loop (fix it)
-    this.updatedViaSimulatedClick = false;
-    
+    this.uiSwitchPosition = null
   }
 
   switchChangedHandler(checked) {
-    console.log(`switch ${checked ? 'is' : 'not'} checked`);
-    console.log(this);
-    
-    // only dispatch to firebase if it was a user click and not
-    // a state correct via simulated click
-    if (this.updatedViaSimulatedClick) {
-      this.updatedViaSimulatedClick = false;
-    } else {
-      this.dispatch(this.switchId, checked)
-    }
+    this.uiSwitchPosition = checked;
+    this.dispatch(this.switchId, checked)
   }
 
   render() {
@@ -37,18 +27,22 @@ class Device extends Component {
   }
 
   componentDidMount() {
+    // get the switch node in the dom
     this.switch = ReactDOM.findDOMNode(this).querySelector(".ant-switch");
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('prev: ', prevProps, 'prevState ', prevState, 'snap ', snapshot);
-    console.log("prev switch was: ", prevProps.switchPosition);
-    console.log('current switch is: ', this.props);
+    // console.log("prev switch was: ", prevProps.switchPosition);
+    // console.log('current switch is: ', this.props);
     
-    // if (prevProps.switchPosition !== this.props.switchPosition) {
-    //   this.switch.click();
-    //   this.updatedViaSimulatedClick = true;
-    // }
+    if (prevProps.switchPosition !== this.props.switchPosition) {
+      this.updatedViaSimulatedClick = true;
+      if (this.props.switchPosition !== this.uiSwitchPosition) {
+        this.switch.click();
+      }
+      
+    }
   }
 }
 

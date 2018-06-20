@@ -21,8 +21,6 @@ export class FireBaseProvider extends React.Component {
 
   dispatch = (switchId, switchPosition) => {
     // this.setState(vals);
-    console.log(`dispatch called!`);
-    console.log(switchId, ': ', switchPosition);
 
     const updates = {
       switchId
@@ -36,7 +34,6 @@ export class FireBaseProvider extends React.Component {
 
       } else {
         // Data saved successfully!
-        console.log('oh ye');
 
       }
     });
@@ -47,7 +44,6 @@ export class FireBaseProvider extends React.Component {
     const starCountRef = firebase.database().ref('users/admin/switches/');
     starCountRef.on('value', (snapshot) => {
       this.setState({devices: {...snapshot.val()}});
-      console.log('mounted and state is: ', this.state);
     });
   }
 
