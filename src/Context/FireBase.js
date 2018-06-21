@@ -20,12 +20,7 @@ export class FireBaseProvider extends React.Component {
   };
 
   dispatch = (switchId, switchPosition) => {
-    // this.setState(vals);
 
-    const updates = {
-      switchId
-    }
-    
     // TODO: ref should be a constant that reflects what user is signed in
     firebase.database().ref(`/users/admin/switches/${switchId}`).update({'state': switchPosition}, function (error) {
       if (error) {
