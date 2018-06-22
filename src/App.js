@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { FireBaseProvider } from "./Context/FireBase";
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import { Layout, Breadcrumb, Icon } from "antd";
 import Devices from "./Components/Devices/Devices";
 import Nav from "./Components/Nav/Nav";
 import Home from "./Components/Home/Home";
