@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { FireBaseProvider } from "./Context/FireBase";
-import { Layout, Breadcrumb, Icon } from "antd";
+import { Layout, Icon } from "antd";
+import MediaQuery from 'react-responsive'
 import Devices from "./Components/Devices/Devices";
 import Nav from "./Components/Nav/Nav";
 import Home from "./Components/Home/Home";
@@ -19,6 +20,34 @@ class App extends Component {
     height: "60px",
     textAlign: "center"
   };
+
+  Example() {
+    return (<div>
+      <div>Device Test!</div>
+      <MediaQuery query="(min-device-width: 1224px)">
+        <div>You are a desktop or laptop</div>
+        <MediaQuery query="(min-device-width: 1824px)">
+          <div>You also have a huge screen</div>
+        </MediaQuery>
+        <MediaQuery query="(max-width: 1224px)">
+          <div>You are sized like a tablet or mobile phone though</div>
+        </MediaQuery>
+      </MediaQuery>
+      <MediaQuery query="(max-device-width: 1224px)">
+        <div>You are a tablet or mobile phone</div>
+      </MediaQuery>
+      <MediaQuery query="(orientation: portrait)">
+        <div>You are portrait</div>
+      </MediaQuery>
+      <MediaQuery query="(orientation: landscape)">
+        <div>You are landscape</div>
+      </MediaQuery>
+      <MediaQuery query="(min-resolution: 2dppx)">
+        <div>You are retina</div>
+      </MediaQuery>
+    </div>);
+  }
+
   render() {
     return (
       <div className="App">
@@ -29,16 +58,11 @@ class App extends Component {
                 <Header style={{ background: "#f0f2f5", margin: "20px 0px" }}>
                   <Nav />
                 </Header>
-                {/* TODO: make a <Bread> component to update crumbs */}
-                <Breadcrumb style={{ margin: "16px 0" }}>
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>List</Breadcrumb.Item>
-                  <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
                 <Content style={{ padding: "0 50px" }}>
                   <div
                     style={{ background: "#fff", padding: 24, minHeight: 280 }}
                   >
+                    <p>{this.Example()}</p>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/devices" component={Devices} />
                     <Route exact path="/signin" component={SignIn} />
