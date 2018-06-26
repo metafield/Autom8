@@ -4,12 +4,7 @@ import { fireBaseConnect } from "../../Context/FireBase";
 import { Table } from "antd";
 import MediaQuery from "react-responsive";
 
-
 class Devices extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     filterDropdownVisible: false,
     data: {},
@@ -39,7 +34,7 @@ class Devices extends Component {
           title: "Name",
           dataIndex: "name",
           key: "name",
-          render: text => <a href="javascript:;">{text}</a>
+          render: text => <a href="">{text}</a>
         },
         {
           title: "Power",
@@ -56,13 +51,13 @@ class Devices extends Component {
             </span>
           )
         }
-      ]
+      ];
       const columns = [
         {
           title: "Name",
           dataIndex: "name",
           key: "name",
-          render: text => <a href="javascript:;">{text}</a>
+          render: text => <a href="">{text}</a>
         },
         { title: "Uptime", dataIndex: "uptime", key: "uptime" },
         {
@@ -88,7 +83,8 @@ class Devices extends Component {
         }
       ];
 
-      return <div className="Devices">
+      return (
+        <div className="Devices">
           <React.Fragment>
             <MediaQuery query="(max-width: 576px)">
               <Table columns={colsSmall} dataSource={this.data} />;
@@ -97,7 +93,8 @@ class Devices extends Component {
               <Table columns={columns} dataSource={this.data} />;
             </MediaQuery>
           </React.Fragment>
-        </div>;
+        </div>
+      );
     } else {
       return <p> loading </p>;
     }
