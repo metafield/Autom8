@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import Device from "./Device";
 import { fireBaseConnect } from "../../Context/FireBase";
-import { Table, Divider, Icon } from "antd";
+import { Table } from "antd";
 
 class Devices extends Component {
-
-  
   constructor(props) {
-    super(props)
-    console.log(props);
-
+    super(props);
   }
-  
+
   state = {
     filterDropdownVisible: false,
     data: {},
@@ -28,11 +24,6 @@ class Devices extends Component {
         cost: "$2.30"
       };
     });
-  }
-
-  componentWillUpdate(p, nex) {
-    console.log(this.props);
-    
   }
 
   render() {
