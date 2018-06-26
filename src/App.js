@@ -21,7 +21,7 @@ class App extends Component {
     textAlign: "center"
   };
 
-  Example() {
+  MediaQueryRef() {
     return (<div>
       <div>Device Test!</div>
       <MediaQuery query="(min-device-width: 1224px)">
@@ -58,16 +58,16 @@ class App extends Component {
                 <Header style={{ background: "#f0f2f5", margin: "20px 0px" }}>
                   <Nav />
                 </Header>
-                <Content style={{ padding: "0 50px" }}>
-                  <div
-                    style={{ background: "#fff", padding: 24, minHeight: 280 }}
-                  >
-                    <p>{this.Example()}</p>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/devices" component={Devices} />
-                    <Route exact path="/signin" component={SignIn} />
-                  </div>
-                </Content>
+
+                  <Content style={{ padding: "0 50px" }}>
+                    <div
+                      style={{ background: "#fff", padding: 24, minHeight: 280 }}
+                    >
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/devices" component={Devices} />
+                      <Route exact path="/signin" component={SignIn} />
+                    </div>
+                  </Content>
 
                 <Footer>
                   Autom8 ©2018 Created by <Icon type="github" />{" "}

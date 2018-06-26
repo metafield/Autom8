@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Device from "./Device";
 import { fireBaseConnect } from "../../Context/FireBase";
 import { Table } from "antd";
+import MediaQuery from "react-responsive";
+
 
 class Devices extends Component {
   constructor(props) {
@@ -32,6 +34,29 @@ class Devices extends Component {
 
     if (devices) {
       this.data = [...this.buildTableData(devices)];
+      const colsSmall = [
+        {
+          title: "Name",
+          dataIndex: "name",
+          key: "name",
+          render: text => <a href="javascript:;">{text}</a>
+        },
+        {
+          title: "Power",
+          key: "power",
+          render: (text, record) => (
+            <span>
+              <Device
+                key={record.key}
+                switchId={record.key}
+                switchPosition={devices[record.key].state}
+                name={devices[record.key].name}
+                dispatch={dispatch}
+              />
+            </span>
+          )
+        }
+      ]
       const columns = [
         {
           title: "Name",
@@ -63,13 +88,16 @@ class Devices extends Component {
         }
       ];
 
-      return (
-        <div className="Devices">
+      return <div className="Devices">
           <React.Fragment>
-            <Table columns={columns} dataSource={this.data} />;
+            <MediaQuery query="(max-width: 576px)">
+              <Table columns={colsSmall} dataSource={this.data} />;
+            </MediaQuery>
+            <MediaQuery query="(min-width: 576px)">
+              <Table columns={columns} dataSource={this.data} />;
+            </MediaQuery>
           </React.Fragment>
-        </div>
-      );
+        </div>;
     } else {
       return <p> loading </p>;
     }
