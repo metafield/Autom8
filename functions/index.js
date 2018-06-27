@@ -7,8 +7,9 @@ const functions = require('firebase-functions');
 //  response.send("Hello from Firebase!");
 // });
 
-exports.onDataAdded = functions.database.ref('/users/admin/switches').onWrite(event => {
-  const data = event.data.val();
-  console.log(data);
-  
-});
+exports.onDataAdded = functions.database
+  .ref("/users/admin/switches/{id}/state")
+  .onWrite((change, context) => {
+
+    console.log(change.after.val());
+  });
