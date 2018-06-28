@@ -14,19 +14,14 @@ const RF_CODES = [
   { on: 4551939, off: 4551948 }
 ];
 
-function transmit(isOn, relayIndex, delay) {
-  setTimeout(() => {
-    exec(
-      `rfoutlet/codesend ${
-        isOn ? RF_CODES[relayIndex].on : RF_CODES[relayIndex].off
-      } -l 185 -p 0`,
-      function(err, data) {
-        if (err) console.log(err);
-        console.log("exec data: ", data.toString());
-      }
-    );
-  }, delay);
-  
+function transmitCode(code) {
+  exec(
+    `rfoutlet/codesend ${code} -l 185 -p 0`,
+    function (err, data) {
+      if (err) console.log(err);
+      console.log("exec data: ", data.toString());
+    }
+  );
 }
 
 admin.initializeApp({
@@ -36,24 +31,32 @@ admin.initializeApp({
 
 const db = admin.database();
 const ref = db.ref("users/admin/switches");
-ref.on(
+const onValueChange = ref.on(
   "value",
   snapshot => {
     console.log(snapshot.val());
     const devices = snapshot.val();
     for (const [index, device] of devices.entries()) {
-      console.log(
-        `sending ${device.state ? "on" : "off"} to: ${device.name}. With Code:`,
-        `${device.state ? RF_CODES[index].on : RF_CODES[index].off}`
-      );
-      if (device.state) {
-        // turn on
-        transmit(true, index, index * 100);
-      } else {
-        // turn off
-        transmit(false, index, index * 100);
-      }
+      setTimeout(() => {
+        device.state ? transmitCode(device.code.on) : transmitCode(device.code.off);
+      }, index * 500);
     }
+    // stop listening
+    ref.off("value", onValueChange);
+  },
+  errObj => {
+    console.log("the read failed: " + errObj.code);
+    // stop listening
+    ref.off("value", onValueChange);
+  }
+);
+
+const onChildChanged = ref.on(
+  "child_changed",
+  (snapshot) => {
+    const device = snapshot.val()
+    console.log(device);
+    device.state ? transmitCode(device.code.on) : transmitCode(device.code.off);
   },
   errObj => {
     console.log("the read failed: " + errObj.code);
