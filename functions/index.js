@@ -10,7 +10,14 @@ const functions = require("firebase-functions");
 exports.onDataAdded = functions.database
   .ref("/users/admin/switches/{id}/state")
   .onWrite((change, context) => {
-    const data = change.after.val();
-    console.log("returning promise to set date switched on");
-    return change.after.ref.parent.child("activatedAt").set(new Date().getTime()); //date to string needed
+    console.log("setting to zero once switch is flipped to false");
+    if (change.after.val()) {
+      return change.after.ref.parent
+        .child("activatedAt")
+        .set(new Date().getTime()); //date to string needed
+    } else {
+      return change.after.ref.parent
+        .child("activatedAt")
+        .set(0);
+    }
   });

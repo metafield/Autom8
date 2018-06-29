@@ -13,14 +13,17 @@ class Devices extends Component {
     filtered: false,
   };
 
-  upTimeOffsetHandler() {
-    this.forceUpdate();
+  upTimeOffset = null;
+  componentDidMount() {
+    this.upTimeOffset = setInterval(() => this.forceUpdate(), 1000);
   }
 
-  upTimeOffset = null;
-
-  componentDidMount() {
-  this.upTimeOffset = setInterval(() => this.upTimeOffsetHandler(), 1000);
+  calcUptime(device) {
+    if (device.activatedAt === 0) {
+      return "Inactive";
+    } else {
+      return TimeSince.timeSince(device.activatedAt);
+    }
   }
 
   buildTableData(devices) {
@@ -28,8 +31,8 @@ class Devices extends Component {
       return {
         key,
         name: devices[key].name,
-        uptime: TimeSince.timeSince(devices[key].activatedAt),
-        cost: "$2.30"
+        uptime: this.calcUptime(devices[key]),
+        cost: "ä2.50"
       };
     });
   }
