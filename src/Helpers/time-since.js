@@ -1,15 +1,16 @@
-const timeSince = {
-  getDiff(createdAt) {
+const TimeSince = {
+  timeSince(createdAt) {
     const dateUpdated = new Date(createdAt);
     let dateDiff = Date.now() - dateUpdated;
+    const ttlSeconds = this.getSeconds(dateDiff);
     const ttlMins = this.getMinutes(dateDiff);
     const ttlHours = this.getHours(dateDiff);
     const ttlDays = this.getDays(dateDiff);
 
     if (ttlMins < 1) {
-      return "Just now";
+      return `${Math.floor(ttlSeconds)}s`;
     } else if (ttlMins < 60) {
-      return `${Math.floor(ttlMins)} minutes(s) ago`;
+      return `${Math.floor(ttlMins)}m ${Math.floor(ttlSeconds - Math.floor(ttlMins) * 60)}s`;
     } else if (ttlMins < 1440) {
       return this.formatTime(dateDiff, ttlMins, ttlHours);
     } else {
@@ -22,7 +23,7 @@ const timeSince = {
       const hours = Math.floor(hours_ttl);
       total -= hours * 1000 * 60 * 60;
       const minutes = Math.floor(this.getMinutes(total));
-      return `${hours} hour(s) ${minutes} min(s) ago`;
+      return `${hours}h ${minutes}m`;
     } else {
       // including days
       const days = Math.floor(days_ttl);
@@ -33,8 +34,11 @@ const timeSince = {
 
       const minutes = Math.floor(this.getMinutes(total));
 
-      return `${days} day(s) ${hours} hour(s) ${minutes} min(s) ago`;
+      return `${days}d ${hours}h ${minutes}m`;
     }
+  },
+  getSeconds(time) {
+    return time / 1000;
   },
   getMinutes(time) {
     return time / (1000 * 60);
@@ -47,4 +51,4 @@ const timeSince = {
   }
 };
 
-export default timeSince;
+export default TimeSince;

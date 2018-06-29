@@ -3,21 +3,32 @@ import Device from "./Device";
 import { fireBaseConnect } from "../../Context/FireBase";
 import { Table } from "antd";
 import MediaQuery from "react-responsive";
+import TimeSince from "../../Helpers/time-since";
 
 class Devices extends Component {
   state = {
     filterDropdownVisible: false,
     data: {},
     searchText: "",
-    filtered: false
+    filtered: false,
   };
 
-  buildTableData(rawData) {
-    return Object.keys(rawData).map(key => {
+  upTimeOffsetHandler() {
+    this.forceUpdate();
+  }
+
+  upTimeOffset = null;
+
+  componentDidMount() {
+  this.upTimeOffset = setInterval(() => this.upTimeOffsetHandler(), 1000);
+  }
+
+  buildTableData(devices) {
+    return Object.keys(devices).map(key => {
       return {
         key,
-        name: rawData[key].name,
-        uptime: 60,
+        name: devices[key].name,
+        uptime: TimeSince.timeSince(devices[key].activatedAt),
         cost: "$2.30"
       };
     });
