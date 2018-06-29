@@ -1,4 +1,7 @@
 const TimeSince = {
+  diffMs(pastDate) {
+    return new Date() - pastDate
+  },
   timeSince(createdAt) {
     const dateUpdated = new Date(createdAt);
     let dateDiff = Date.now() - dateUpdated;

@@ -10,7 +10,7 @@ class Devices extends Component {
     filterDropdownVisible: false,
     data: {},
     searchText: "",
-    filtered: false,
+    filtered: false
   };
 
   upTimeOffset = null;
@@ -26,13 +26,29 @@ class Devices extends Component {
     }
   }
 
+  calcCost(device) {
+    if (device.activatedAt === 0) return 0;
+
+    const rate = 10.65;
+    const activatedAt = new Date(device.activatedAt);
+    const cost = Number.parseFloat(
+      rate * TimeSince.getHours(TimeSince.diffMs(activatedAt))
+    ).toPrecision(3);
+
+    if (device.state) {
+      return cost;
+    } else {
+      return 0;
+    }
+  }
+
   buildTableData(devices) {
     return Object.keys(devices).map(key => {
       return {
         key,
         name: devices[key].name,
         uptime: this.calcUptime(devices[key]),
-        cost: "ä2.50"
+        cost: "$" + this.calcCost(devices[key])
       };
     });
   }
