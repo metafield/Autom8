@@ -12,14 +12,6 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
 
 class App extends Component {
-  footerStyle = {
-    position: "absolutse",
-    bottom: 0,
-    width: "100%",
-    height: "60px",
-    textAlign: "center"
-  };
-
   MediaQueryRef() {
     return (
       <div>
@@ -54,10 +46,8 @@ class App extends Component {
         <FireBaseProvider>
           <Router>
             <div className="router">
-              <header className="App-header">
-                <Nav />
-              </header>
               <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
+                <Route path="/" component={Nav} />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/devices" component={Devices} />
                 <Route exact path="/signin" component={SignIn} />

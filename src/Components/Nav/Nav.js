@@ -4,20 +4,23 @@ import { Menu, Icon } from "antd";
 
 class Nav extends Component {
   state = {
-    current: "mail"
+    current: "home"
   };
 
-  handleClick = e => {
-    console.log("click", e);
-    this.setState({ current: e.key });
-  };
+  constructor(props) {
+    super(props);
+
+    const splitUrl = window.location.href.split("/");
+    const endpoint = splitUrl[splitUrl.length - 1];
+    if (endpoint) this.state = { current: endpoint };
+  }
 
   render() {
     return (
       <Menu
         theme="light"
         mode="horizontal"
-        defaultSelectedKeys={["2"]}
+        defaultSelectedKeys={[this.state.current]}
         style={{ lineHeight: "64px" }}
       >
         <Menu.Item key="home">
