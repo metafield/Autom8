@@ -41,14 +41,13 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <FireBaseProvider>
           <Router>
             <div className="router">
-              <header
-                className="App-header"
-              >
+              <header className="App-header">
+                <div className="Infinity" />
+                <div className="Infinity" />
                 <Nav />
               </header>
               <div className="Container">
@@ -57,14 +56,14 @@ class App extends Component {
                 <Route exact path="/signin" component={SignIn} />
               </div>
               <footer className="App-footer">
-                Autom8 ©2018 Created by <Icon type="github" />{" "}
-                <a href="www.github.com/metafield">metafield</a>
+                Autom8 ©2018 Created by <Icon type="github" /> <a href="www.github.com/metafield">
+                  metafield
+                </a>
               </footer>
             </div>
           </Router>
         </FireBaseProvider>
-      </div>
-    );
+      </div>;
   }
 }
 

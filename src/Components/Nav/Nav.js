@@ -25,7 +25,7 @@ class Nav extends Component {
       >
         <Menu.Item key="home">
           <Link to={`/`}>
-            <Icon type="home" />Home
+            <Icon type="wifi" />Autom8
           </Link>
         </Menu.Item>
         <Menu.Item key="devices">
