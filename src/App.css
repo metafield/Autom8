@@ -1,3 +1,8 @@
+.small {
+  width: 18px;
+  height: 18px;
+}
+
 #root {
   height: 100vh;
   background-color: #eee;
