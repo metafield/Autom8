@@ -40,25 +40,6 @@ class Nav extends Component {
         </Menu.Item>
       </Menu>
     );
-
-    // <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-    // <Menu.Item key="home">
-    //   <Link to={`/`}>
-    //     <Icon type="home" />Home
-    //   </Link>
-    // </Menu.Item>
-    // <Menu.Item key="devices">
-    //   <Link to={`/devices`}>
-    //     <Icon type="usb" />My Devices
-    //   </Link>
-    // </Menu.Item>
-    // <Menu.Item key="signIn">
-    //   <Link to={`/signIn`}>
-    //     <Icon type="user" />Sign In
-    //   </Link>
-    // </Menu.Item>
-
-    //   </Menu>;
   }
 }
 
