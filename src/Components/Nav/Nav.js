@@ -33,11 +33,6 @@ class Nav extends Component {
             <Icon type="usb" />My Devices
           </Link>
         </Menu.Item>
-        <Menu.Item key="signIn">
-          <Link to={`/signIn`}>
-            <Icon type="user" />Sign In
-          </Link>
-        </Menu.Item>
       </Menu>
     );
   }
