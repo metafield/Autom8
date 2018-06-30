@@ -10,7 +10,6 @@ import SignIn from "./Components/SignIn/SignIn";
 import "./App.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
-
 class App extends Component {
   MediaQueryRef() {
     return (
@@ -42,25 +41,30 @@ class App extends Component {
   }
 
   render() {
-    return <div className="App">
+    return (
+      <div className="App">
         <FireBaseProvider>
           <Router>
             <div className="router">
-              <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-                <Route path="/" component={Nav} />
+              <header
+                className="App-header"
+              >
+                <Nav />
+              </header>
+              <div className="Container">
                 <Route exact path="/" component={Home} />
                 <Route exact path="/devices" component={Devices} />
                 <Route exact path="/signin" component={SignIn} />
               </div>
               <footer className="App-footer">
-                Autom8 ©2018 Created by <Icon type="github" /> <a href="www.github.com/metafield">
-                metafield
-              </a>
+                Autom8 ©2018 Created by <Icon type="github" />{" "}
+                <a href="www.github.com/metafield">metafield</a>
               </footer>
             </div>
           </Router>
         </FireBaseProvider>
-      </div>;
+      </div>
+    );
   }
 }
 
