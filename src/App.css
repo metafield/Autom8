@@ -1,6 +1,16 @@
-.small {
-  width: 18px;
-  height: 18px;
+.ThirdPartyIcon {
+  font-size: 5em;
+}
+
+.Login {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 3px 5px rgba(168, 168, 168, 0.527);
+  margin-top: 160px;
+}
+
+.ColOutline {
+  border: blue dotted;
 }
 
 #root {
