@@ -113,18 +113,16 @@ class Devices extends Component {
         }
       ];
 
-      return (
-        <div className="Devices">
+      return <div className="Devices">
           <React.Fragment>
             <MediaQuery query="(max-width: 576px)">
-              <Table columns={colsSmall} dataSource={this.data} />;
+              <Table columns={colsSmall} dataSource={this.data} pagination={false} />
             </MediaQuery>
             <MediaQuery query="(min-width: 576px)">
-              <Table columns={columns} dataSource={this.data} />;
+            <Table columns={columns} dataSource={this.data} pagination={false} />
             </MediaQuery>
           </React.Fragment>
         </div>
-      );
     } else {
       return <p> loading </p>;
     }
